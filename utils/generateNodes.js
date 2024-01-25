@@ -15,8 +15,10 @@ const generateNodes = (data, result = [], nodeAddress = "") => {
 
         const node = {
             id: currentNodeAddress,
+            _id: `${currentNodeAddress.slice(0, -1)}_${i}`,
             data: {
                 label: data[i].title,
+                parentId: currentNodeAddress.length > 1 ? `${currentNodeAddress.slice(0, -1)}` : currentNodeAddress,
             },
             type: currentNodeAddress.length === 2 ? "subTree" : "multipleConnector",
             position: {
@@ -28,7 +30,10 @@ const generateNodes = (data, result = [], nodeAddress = "") => {
         if (data[i].child) {
             const updatedNode = {
                 ...node,
-                subNodes: data[i].child.length,
+                data: {
+                    ...node.data,
+                    subNodes: data[i].child.length,
+                },
             };
             result.push(updatedNode);
             generateNodes(data[i].child, result, currentNodeAddress);
