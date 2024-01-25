@@ -1,38 +1,18 @@
-import { BaseEdge, EdgeLabelRenderer, getSimpleBezierPath, useReactFlow } from "reactflow";
+import PropTypes from "prop-types";
+import { BaseEdge, EdgeLabelRenderer, getSimpleBezierPath } from "reactflow";
 
 const EdgeForSubNode = ({ id, sourceX, sourceY, targetX, targetY }) => {
-    const { setEdges } = useReactFlow();
-    const [path, labelX, labelY, offsetX, offsetY] = getSimpleBezierPath({
+    const [path, labelX, labelY] = getSimpleBezierPath({
         sourceX,
         sourceY,
-        // sourcePosition: Position.Top,
         targetX,
         targetY,
-        // targetPosition: Position.Bottom,
     });
-
-    console.log({ path, labelX, labelY, offsetX, offsetY, sourceX, targetX, targetY, sourceY });
 
     return (
         <>
             <BaseEdge id={id} path={path} />
             <EdgeLabelRenderer>
-                {/* <div
-                    style={{
-                        position: "absolute",
-                        transform: `translate(-55%, -50%) translate(${
-                            labelX > targetX ? labelX + 40 : labelX - 40
-                        }px, ${labelY - 35}px)`,
-                        pointerEvents: "none",
-                        backgroundColor: "#fff",
-                        border: "1px solid #eee",
-                        fontSize: "12px",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
-                    }}
-                >
-                    Sub tree
-                </div> */}
                 <button
                     style={{
                         position: "absolute",
@@ -65,6 +45,14 @@ const EdgeForSubNode = ({ id, sourceX, sourceY, targetX, targetY }) => {
             </EdgeLabelRenderer>
         </>
     );
+};
+
+EdgeForSubNode.propTypes = {
+    id: PropTypes.string.isRequired,
+    sourceX: PropTypes.number.isRequired,
+    sourceY: PropTypes.number.isRequired,
+    targetX: PropTypes.number.isRequired,
+    targetY: PropTypes.number.isRequired,
 };
 
 export default EdgeForSubNode;

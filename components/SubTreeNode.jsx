@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Handle, Position } from "reactflow";
 
 const SubTreeNode = ({ data, isConnectable }) => {
@@ -20,6 +21,14 @@ const SubTreeNode = ({ data, isConnectable }) => {
             <Handle type="source" position={Position.Bottom} id={`connector_sub_tree`} isConnectable={isConnectable} />
         </div>
     );
+};
+
+SubTreeNode.propTypes = {
+    data: PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        parentId: PropTypes.string.isRequired,
+    }).isRequired,
+    isConnectable: PropTypes.bool.isRequired,
 };
 
 export default SubTreeNode;

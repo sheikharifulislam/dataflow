@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Handle, Position } from "reactflow";
 import generateSequence from "../utils/generateSequence";
 
@@ -34,6 +35,14 @@ const multipleConnectorNode = ({ data, isConnectable }) => {
             ))}
         </div>
     );
+};
+
+multipleConnectorNode.propTypes = {
+    data: PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        parentId: PropTypes.string.isRequired,
+    }).isRequired,
+    isConnectable: PropTypes.bool.isRequired,
 };
 
 export default multipleConnectorNode;

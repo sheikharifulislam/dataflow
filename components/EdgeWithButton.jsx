@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
 import { BaseEdge, EdgeLabelRenderer, getStraightPath } from "reactflow";
 
 const EdgeWithButton = ({ id, sourceX, sourceY, targetX, targetY }) => {
-    const [path, labelX, labelY, offsetX, offsetY] = getStraightPath({
+    const [path, labelX, labelY] = getStraightPath({
         sourceX,
         sourceY,
         targetX,
@@ -43,6 +44,14 @@ const EdgeWithButton = ({ id, sourceX, sourceY, targetX, targetY }) => {
             </EdgeLabelRenderer>
         </>
     );
+};
+
+EdgeWithButton.propTypes = {
+    id: PropTypes.string.isRequired,
+    sourceX: PropTypes.number.isRequired,
+    sourceY: PropTypes.number.isRequired,
+    targetX: PropTypes.number.isRequired,
+    targetY: PropTypes.number.isRequired,
 };
 
 export default EdgeWithButton;
