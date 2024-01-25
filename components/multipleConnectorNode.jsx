@@ -3,7 +3,7 @@ import generateSequence from "../utils/generateSequence";
 
 const multipleConnectorNode = ({ data, isConnectable }) => {
     const sequence = generateSequence(data?.subNodes || 1, 200);
-    console.log(sequence);
+
     return (
         <div
             style={{
@@ -20,20 +20,18 @@ const multipleConnectorNode = ({ data, isConnectable }) => {
             <div>
                 <span> {data.label} </span>
             </div>
-            {sequence.map((_item, index) => {
-                return (
-                    <Handle
-                        key={index}
-                        type="source"
-                        position={Position.Bottom}
-                        id={`connector_${index + 1}`}
-                        isConnectable={isConnectable}
-                        style={{
-                            left: sequence[index],
-                        }}
-                    />
-                );
-            })}
+            {sequence.map((_item, index) => (
+                <Handle
+                    key={index}
+                    type="source"
+                    position={Position.Bottom}
+                    id={`${data.parentId}_${index}`}
+                    isConnectable={isConnectable}
+                    style={{
+                        left: sequence[index],
+                    }}
+                />
+            ))}
         </div>
     );
 };
